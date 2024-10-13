@@ -1,15 +1,13 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import { Button, Card, CardContent, Typography } from '@mui/material';
 
 import { login } from '../../store/reducers/auth/authSlice';
-
-import './login.scss';
 import { RootState } from '../../store/store';
-import { useEffect } from 'react';
-
-const loggedInPage = '/app/search';
+import { LOGGED_IN_PAGE } from '../../constants/navigation-constants';
+import { GOOGLE_BOOKS_SCOPE } from '../../constants/api-constants';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -18,24 +16,24 @@ const Login = () => {
 
     useEffect(() => {
         if (authToken) {
-            navigate(loggedInPage);
+            navigate(LOGGED_IN_PAGE);
         }
     }, [authToken, navigate]);
 
     const loginGoogle = useGoogleLogin({
         onSuccess: (credentialResponse) => {
             dispatch(login(credentialResponse.access_token ?? ''));
-            navigate(loggedInPage);
+            navigate(LOGGED_IN_PAGE);
         },
         onError: () => {
             console.error('Login failed!');
         },
-        scope: 'https://www.googleapis.com/auth/books',
+        scope: GOOGLE_BOOKS_SCOPE,
     });
 
     return (
         <Card>
-            <CardContent className='login-card'>
+            <CardContent className='text-center'>
                 <Typography variant='subtitle1'>Great to see you back!</Typography>
                 <Button variant='contained' onClick={() => loginGoogle()}>
                     Login via Google

@@ -7,7 +7,8 @@ import store from '../store/store';
 import { API_CLIENT_ID } from '../env/api';
 import theme from '../theme';
 
-import '../base.scss';
+import '../styles/base.scss';
+import '../styles/utils.scss';
 
 const BaseRoute = () => {
     return (
