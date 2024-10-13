@@ -1,17 +1,31 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
-import { useState, useEffect } from 'react';
-import { searchBooks } from '../../services/api-service';
 import { Button, Card, CardContent, Typography } from '@mui/material';
 
+import { login } from '../../store/reducers/auth/authSlice';
+
 import './login.scss';
+import { RootState } from '../../store/store';
+import { useEffect } from 'react';
+
+const loggedInPage = '/app/search';
 
 const Login = () => {
-    const [authToken, setAuthToken] = useState('');
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const authToken = useSelector((state: RootState) => state.auth.token);
 
-    const login = useGoogleLogin({
+    useEffect(() => {
+        if (authToken) {
+            navigate(loggedInPage);
+        }
+    }, [authToken, navigate]);
+
+    const loginGoogle = useGoogleLogin({
         onSuccess: (credentialResponse) => {
-            console.log(credentialResponse);
-            setAuthToken(credentialResponse.access_token ?? '');
+            dispatch(login(credentialResponse.access_token ?? ''));
+            navigate(loggedInPage);
         },
         onError: () => {
             console.error('Login failed!');
@@ -19,20 +33,11 @@ const Login = () => {
         scope: 'https://www.googleapis.com/auth/books',
     });
 
-    useEffect(() => {
-        (async () => {
-            if (authToken) {
-                const response = await searchBooks(authToken, 'Lord of the Rings');
-                console.log(response);
-            }
-        })();
-    }, [authToken]);
-
     return (
         <Card>
             <CardContent className='login-card'>
                 <Typography variant='subtitle1'>Great to see you back!</Typography>
-                <Button variant='contained' onClick={() => login()}>
+                <Button variant='contained' onClick={() => loginGoogle()}>
                     Login via Google
                 </Button>
             </CardContent>
