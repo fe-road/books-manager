@@ -1,0 +1,20 @@
+.search-input {
+    transition: all ease 0.4s;
+
+    label,
+    div {
+        color: white;
+        transition: all ease 0.4s;
+    }
+
+    input {
+        transition: width ease 0.4s;
+        -webkit-transition: width ease 0.4s;
+        -moz-transition: width ease 0.4s;
+    }
+
+    div::before,
+    div:hover:before {
+        border-color: white !important;
+    }
+}

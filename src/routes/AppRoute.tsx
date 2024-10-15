@@ -1,9 +1,11 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 import { RootState } from '../store/store';
-import { useEffect } from 'react';
 import { LOGGED_OUT_PAGE } from '../constants/navigation-constants';
+
+import ApplicationBar from '../components/app-bar/ApplicationBar';
 
 const AppRoute = () => {
     const navigate = useNavigate();
@@ -15,7 +17,12 @@ const AppRoute = () => {
         }
     }, [navigate, authToken]);
 
-    return authToken ? <Outlet /> : null;
+    return authToken ? (
+        <>
+            <ApplicationBar />
+            <Outlet />
+        </>
+    ) : null;
 };
 
 export default AppRoute;
