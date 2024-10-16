@@ -5,9 +5,10 @@ import { searchBooks } from '../../services/api-service';
 import { RootState } from '../../store/store';
 
 import './search-input.scss';
+import { setResult, setText } from '../../store/reducers/search/searchSlice';
 
 const SearchInput = () => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const authToken = useSelector((state: RootState) => state.auth.token);
     const [searchText, setSearchText] = useState('');
 
@@ -20,7 +21,8 @@ const SearchInput = () => {
     const doSearch = async () => {
         if (authToken && searchText) {
             const response = await searchBooks(authToken, searchText);
-            console.log(response);
+            dispatch(setText(searchText));
+            dispatch(setResult(response.data.items));
         }
     };
 

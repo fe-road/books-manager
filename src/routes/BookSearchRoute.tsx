@@ -1,16 +1,7 @@
-import { Typography } from '@mui/material';
-
-import SearchBooks from '../components/search/SearchBooks';
+import SearchBookList from '../components/search/SearchBookList';
 
 const BookSearchRoute = () => {
-    return (
-        <>
-            <Typography variant='h2' component='h1'>
-                Books Search
-            </Typography>
-            <SearchBooks />
-        </>
-    );
+    return <SearchBookList />;
 };
 
 export default BookSearchRoute;

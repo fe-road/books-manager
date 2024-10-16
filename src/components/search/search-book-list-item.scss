@@ -1,0 +1,12 @@
+.book-list-item {
+    display: flex;
+
+    .book-image {
+        width: 80px;
+        margin-right: 12px;
+    }
+
+    .published-date {
+        margin-right: 8px;
+    }
+}

@@ -20,7 +20,9 @@ const AppRoute = () => {
     return authToken ? (
         <>
             <ApplicationBar />
-            <Outlet />
+            <section className='page-content'>
+                <Outlet />
+            </section>
         </>
     ) : null;
 };

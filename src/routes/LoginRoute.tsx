@@ -3,7 +3,7 @@ import Login from '../components/login/Login';
 
 const LoginRoute = () => {
     return (
-        <>
+        <section className='login-section'>
             <Typography variant='h2' component='h1'>
                 Books Manager
             </Typography>
@@ -12,7 +12,7 @@ const LoginRoute = () => {
                     <Login />
                 </Grid>
             </Grid>
-        </>
+        </section>
     );
 };
 

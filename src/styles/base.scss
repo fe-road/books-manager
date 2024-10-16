@@ -1,14 +1,24 @@
 html,
-body {
+body,
+#root {
     background-color: #fafafa;
 }
 
 .base-container {
+    height: 100%;
+    background-color: #fafafa;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.login-section {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    font-optical-sizing: auto;
-    font-style: normal;
+}
+
+.page-content {
+    padding-top: 72px;
 }
