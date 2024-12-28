@@ -1,29 +1,26 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Icon, IconButton, InputAdornment, TextField } from '@mui/material';
-import { searchBooks } from '../../services/api-service';
-import { RootState } from '../../store/store';
+import { AppDispatch } from '../../store/store';
+
+import { setText } from '../../store/reducers/search/searchSlice';
+import { doSearch } from '../../store/reducers/search/search.thunk';
 
 import './search-input.scss';
-import { setResult, setText } from '../../store/reducers/search/searchSlice';
 
 const SearchInput = () => {
-    const dispatch = useDispatch();
-    const authToken = useSelector((state: RootState) => state.auth.token);
+    const dispatch = useDispatch<AppDispatch>();
     const [searchText, setSearchText] = useState('');
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key.toLowerCase() === 'enter') {
-            doSearch();
+            search();
         }
     };
 
-    const doSearch = async () => {
-        if (authToken && searchText) {
-            const response = await searchBooks(authToken, searchText);
-            dispatch(setText(searchText));
-            dispatch(setResult(response.data.items));
-        }
+    const search = async () => {
+        dispatch(setText(searchText));
+        dispatch(doSearch());
     };
 
     return (
@@ -40,7 +37,7 @@ const SearchInput = () => {
                 input: {
                     endAdornment: searchText ? (
                         <InputAdornment position='end'>
-                            <IconButton onClick={doSearch} color='inherit'>
+                            <IconButton onClick={search} color='inherit'>
                                 <Icon>search</Icon>
                             </IconButton>
                         </InputAdornment>

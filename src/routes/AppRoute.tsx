@@ -6,6 +6,7 @@ import { RootState } from '../store/store';
 import { LOGGED_OUT_PAGE } from '../constants/navigation-constants';
 
 import ApplicationBar from '../components/app-bar/ApplicationBar';
+import QueryParamsSync from '../components/sync/QueryParamsSync';
 
 const AppRoute = () => {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ const AppRoute = () => {
 
     return authToken ? (
         <>
+            <QueryParamsSync />
             <ApplicationBar />
             <section className='page-content'>
                 <Outlet />
