@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Icon, IconButton, InputAdornment, TextField } from '@mui/material';
 import { AppDispatch } from '../../store/store';
 
@@ -10,6 +11,7 @@ import './search-input.scss';
 
 const SearchInput = () => {
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
     const [searchText, setSearchText] = useState('');
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -21,6 +23,7 @@ const SearchInput = () => {
     const search = async () => {
         dispatch(setText(searchText));
         dispatch(doSearch());
+        navigate('/app/search');
     };
 
     return (

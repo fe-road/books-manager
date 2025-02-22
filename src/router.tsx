@@ -4,6 +4,7 @@ import BaseRoute from './routes/BaseRoute';
 import AppRoute from './routes/AppRoute';
 import LoginRoute from './routes/LoginRoute';
 import BookSearchRoute from './routes/BookSearchRoute';
+import BookshelfRoute from './routes/BookshelfRoute';
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
                     {
                         path: 'search',
                         element: <BookSearchRoute />,
+                    },
+                    {
+                        path: 'bookshelves',
+                        element: <BookshelfRoute />,
                     },
                 ],
             },

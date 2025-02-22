@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { AppBar, Icon, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
 import { logout } from '../../store/reducers/auth/authSlice';
 import SearchInput from '../search/SearchInput';
 
 const ApplicationBar = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -18,6 +20,11 @@ const ApplicationBar = () => {
 
     const performLogout = () => {
         dispatch(logout());
+    };
+
+    const selectLink = (link: string) => {
+        navigate(link);
+        handleClose();
     };
 
     return (
@@ -53,6 +60,7 @@ const ApplicationBar = () => {
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >
+                    <MenuItem onClick={() => selectLink('/app/bookshelves')}>My Bookshelves</MenuItem>
                     <MenuItem onClick={performLogout}>Logout</MenuItem>
                 </Menu>
             </Toolbar>

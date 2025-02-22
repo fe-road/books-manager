@@ -18,7 +18,7 @@ const initialState: SearchState = {
 };
 
 const searchSlice = createSlice({
-    name: 'auth',
+    name: 'search',
     initialState,
     reducers: {
         setText: (state: SearchState, action: PayloadAction<string>) => {
